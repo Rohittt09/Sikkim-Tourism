@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Sikkim Tourism - Enquiry Form</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f5e9dc;
+      background-image: url('bgimage.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+    header {
+      background: #2C3E50;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header .logo img {
+      height: 60px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      background: #3498DB;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: #3498DB;
+      left: 0;
+      bottom: -5px;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    nav ul li a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .enquiry {
+      padding: 01px 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.4); 
+    }
+
+    .enquiry h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .enquiry p {
+      font-size: 1.5rem;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+
+    .enquiry-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #f5e9dc;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 1.1rem;
+      color: #2C3E50;
+      margin-bottom: 5px;
+    }
+
+    .form-group .required {
+      color: #4CAF50;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: #fff;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #3498DB;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+    }
+
+    .form-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .submit-btn {
+      background: #3498DB;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: #4CAF50;
+    }
+
+    .reset-btn {
+      background: #d32f2f;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .reset-btn:hover {
+      background: #b71c1c;
+    }
+
+    .error-message {
+      color: #d32f2f;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      min-height: 24px;
+    }
+
+    footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1200px;
+  padding-bottom: 10px;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.0rem;
+  transition: color 0.3s ease;
+ 
+}
+
+.footer-nav a:hover {
+  color: #3498DB;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 1.0rem;
+  text-align: center;
+}
+
+.footer-contact span {
+  color: white;
+  padding-right: 160px;
+}
+
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+.social-label {
+  font-size: 1.0rem;
+  color: white;
+  padding-right: 25px;
+}
+.social-icons {
+  display: flex;
+  gap: 15px; 
+}
+.social-icon img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease; 
+}
+.social-icon:hover img {
+  transform: scale(1.2);
+}
+
+footer  p {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Sikkim Tourism Logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#about">About Sikkim</a></li>
+        <li><a href="index.html#destinations">Destinations</a></li>
+        <li><a href="index.html#gallery">Gallery</a></li>
+        <li><a href="index.html#culture">Culture</a></li>
+        <li><a href="#enquiry">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Enquiry Form Section -->
+  <section id="enquiry" class="enquiry">
+    <h2>Enquiry Form</h2>
+    <p><b>Have questions about traveling to Sikkim? Fill out the form below, and we'll get back to you!</b></p>
+    <div class="enquiry-form">
+      <div id="errorMsg" class="error-message"></div>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Name <span class="required">*</span></label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email <span class="required">*</span></label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="contact">Contact Number <span class="required">*</span></label>
+          <input type="tel" id="contact" name="contact" placeholder="Enter your contact number" required>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject <span class="required">*</span></label>
+          <input type="text" id="subject" name="subject" placeholder="Enter the subject" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message <span class="required">*</span></label>
+          <textarea id="message" name="message" placeholder="Enter your message" rows="5" required></textarea>
+        </div>
+        <div class="form-buttons">
+          <button type="submit" class="submit-btn">Submit</button>
+          <button type="reset" class="reset-btn">Reset</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer id="contact">
+    <div class="footer-content">
+      <nav class="footer-nav">
+        <a href="#about">About Sikkim</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#gallery">Places</a>
+        <a href="#culture">Culture</a>
+        <a href="form.html">Enquiry</a>
+      </nav>
+      <div class="footer-contact">
+        <span>Phone: +91 9837486 67891</span>
+        <span>Location: MG Marg, Gangtok, Sikkim, India</span>
+      </div>
+      <div class="footer-social">
+        <span class="social-label">Follow Us</span>
+        <div class="social-icons">
+          <a href="https://www.facebook.com" target="_blank" class="social-icon">
+            <img src="facebook.png" alt="Facebook">
+          </a>
+          <a href="https://www.twitter.com" target="_blank" class="social-icon">
+            <img src="twitter.png" alt="Twitter">
+          </a>
+          <a href="https://www.instagram.com" target="_blank" class="social-icon">
+            <img src="instagram.jpeg" alt="Instagram">
+          </a>
+        </div>
+      </div>
+    </div>
+    <p>@ 2026 Sikkim Tourism Guide. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    document.querySelectorAll('.social-icon').forEach(icon => {
+      icon.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = e.currentTarget.href;
+        window.open(url, '_blank');
+      });
+    });
+
+    document.querySelectorAll('.footer-nav a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = e.currentTarget.getAttribute('href');
+        if (targetId.startsWith('#')) {
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        } else {
+          window.location.href = targetId;
+        }
+      });
+    });
+  </script>
+    <!--JQuery-->
+  <script>
+    $(document).ready(function() {
+      $("#contactForm").submit(function(e) {
+        e.preventDefault(); // Prevent form from submitting normally
+
+        let name = $("#name").val().trim();
+        let email = $("#email").val().trim();
+        let contact = $("#contact").val().trim();
+        let subject = $("#subject").val().trim();
+        let message = $("#message").val().trim();
+        let error = "";
+
+        if (name === "" || email === "" || contact === "" || subject === "" || message === "") {
+          error = "All fields are required.";
+        } else if (!validateEmail(email)) {
+          error = "Please enter a valid email address.";
+        } else if (!validateContact(contact)) {
+          error = "Please enter a valid contact number (10 digits).";
+        }
+
+        if (error) {
+          $("#errorMsg").text(error);
+        } else {
+          $("#errorMsg").text("");
+          alert("Form submitted!\nName: " + name + "\nEmail: " + email + "\nContact: " + contact + "\nSubject: " + subject + "\nMessage: " + message);
+          // You can send the data to the server here using AJAX
+        }
+      });
+
+      $("#contactForm").on('reset', function() {
+        $("#errorMsg").text(""); // Clear error message
+        $("#name, #email, #contact, #subject, #message").val(""); // Clear all fields
+      });
+
+      function validateEmail(email) {
+        var re = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+        return re.test(email);
+      }
+
+      function validateContact(contact) {
+        var re = /^\d{10}$/;
+        return re.test(contact);
+      }
+    });
+  </script>
+</body>
+</html>
